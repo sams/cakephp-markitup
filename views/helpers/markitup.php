@@ -34,17 +34,16 @@ class MarkitupHelper extends AppHelper {
 		$textarea = array_merge($textarea, array('type' => 'textarea'));
 		$id = '#' . parent::domId($name);
 
-		$out[] = 'jQuery.noConflict();';
-		$out[] = 'jQuery(function() {';
-		$out[] = '  jQuery("' . $id . '").markItUp(';
+		$out[] = '$(function() {';
+		$out[] = '  $("' . $id . '").markItUp(';
 		$out[] = '     ' . $settings['settings'] . ',';
 		$out[] = '     {';
 		$out[] = '        previewParserPath:"' . $settings['parser'] . '"';
 		$out[] = '     }';
 		$out[] = '  );';
 		$out[] = '});';
-
-		return $this->output($this->Form->input($name, $textarea) . $this->Javascript->codeBlock(join("\n", $out)));
+		$this->Html->scriptBlock(join("\n", $out), array('inline' => false));
+		return $this->output($this->Form->input($name, $textarea));
 	}
 	/**
 	 * Link to build markItUp! on a existing textfield
@@ -149,9 +148,9 @@ class MarkitupHelper extends AppHelper {
 		$this->Html->css(array(
 			$this->paths['css'] . 'skins' . DS . $settings['skin'] . DS . 'style',
 			$this->paths['css'] . 'sets' . DS . $settings['set'] . DS . 'style',
-		), null, null, false);
+		), null, array('inline' => false));
 
-		$this->Javascript->link($this->paths['js'] . 'sets' . DS . $settings['set'] . DS . 'set', false);
+		$this->Html->script($this->paths['js'] . 'sets' . DS . $settings['set'] . DS . 'set', array('inline' => false));
 
 		return array('settings' => $settings, 'default' => $default);
 	}
