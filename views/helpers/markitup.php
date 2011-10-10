@@ -124,7 +124,7 @@ class MarkitupHelper extends AppHelper {
 			$content = $class($content);
 		}
 
-		echo $this->Html->css($this->paths['css'] . 'templates' . DS . 'preview', null, null, false);
+		echo $this->Html->css($this->paths['css'] . 'templates/preview', null, null, false);
 
 		return $content;
 	}
@@ -146,11 +146,11 @@ class MarkitupHelper extends AppHelper {
 		}
 
 		$this->Html->css(array(
-			$this->paths['css'] . 'skins' . DS . $settings['skin'] . DS . 'style',
-			$this->paths['css'] . 'sets' . DS . $settings['set'] . DS . 'style',
+			$this->paths['css'] . 'skins/' . $settings['skin'] . '/style',
+			$this->paths['css'] . 'sets/' .  $settings['set'] . '/style',
 		), null, array('inline' => false));
 
-		$this->Html->script($this->paths['js'] . 'sets' . DS . $settings['set'] . DS . 'set', array('inline' => false));
+		$this->Html->script($this->paths['js'] . 'sets/' . $settings['set'] . '/set', array('inline' => false));
 
 		return array('settings' => $settings, 'default' => $default);
 	}
